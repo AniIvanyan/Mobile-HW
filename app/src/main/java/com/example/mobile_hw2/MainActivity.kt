@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -65,40 +65,38 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 @Composable
 fun WelcomeScreen(navController: NavController) {
-    Button(
-        onClick = { navController.navigate("second_screen") },
+    Box(
         modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
+            .fillMaxSize()
+            .padding(16.dp),
+        contentAlignment = Alignment.Center
     ) {
-        Text(text = "Go to Second Screen")
+        Button(
+            onClick = { navController.navigate("second_screen") },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Go to explore the cities")
+        }
     }
 }
+
 @Composable
 fun SecondScreen(navController: NavController) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp)
     ) {
-        // Loop through the cityList
         items(cityList) { city ->
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
-                    .clickable {
-                        navController.navigate("second_screen/$city")
-                    }
             ) {
-                // Display city name using CityItem
-                CityItem(city = city) {
-                    navController.navigate("second_screen/$city")
-                }
+                CityItem(city = city)
             }
-
-            // Display city image
             Image(
                 painter = painterResource(id = getCityImage(city)),
                 contentDescription = "City Image",
@@ -108,13 +106,21 @@ fun SecondScreen(navController: NavController) {
                     .clip(shape = RoundedCornerShape(8.dp)),
                 contentScale = ContentScale.Crop
             )
-
-            // Display description of the city
             Text(
                 text = getCityDescription(city),
                 fontSize = 16.sp,
                 modifier = Modifier.padding(top = 8.dp)
             )
+        }
+        item {
+            Button(
+                onClick = { navController.popBackStack() },
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+            ) {
+                Text(text = "Back to Welcome Screen")
+            }
         }
     }
 }
@@ -143,13 +149,13 @@ private fun getCityDescription(city: String): String {
         else -> "Description not available."
     }
 }
+
 @Composable
-fun CityItem(city: String, onItemClick: () -> Unit) {
+fun CityItem(city: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .clickable(onClick = onItemClick)
     ) {
         Text(
             text = city,
@@ -158,9 +164,10 @@ fun CityItem(city: String, onItemClick: () -> Unit) {
         )
     }
 }
+
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun Preview() {
     MobileHW2Theme {
     }
 }
