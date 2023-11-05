@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -51,8 +54,8 @@ class MainActivity : ComponentActivity() {
                     composable("welcome_screen") {
                         WelcomeScreen(navController)
                     }
-                    composable("second_screen") {
-                        SecondScreen(navController)
+                    composable("list_screen") {
+                        ListScreen(navController)
                     }
                 }
             }
@@ -74,17 +77,30 @@ fun WelcomeScreen(navController: NavController) {
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
-        Button(
-            onClick = { navController.navigate("second_screen") },
-            modifier = Modifier.fillMaxWidth()
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxSize()
         ) {
-            Text(text = "Go to explore the cities")
+            Text(
+                text = stringResource(R.string.welcome_message),
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+
+            Button(
+                onClick = { navController.navigate("list_screen") },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = stringResource(R.string.list_button))
+            }
         }
     }
 }
 
 @Composable
-fun SecondScreen(navController: NavController) {
+fun ListScreen(navController: NavController) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp)
@@ -95,11 +111,11 @@ fun SecondScreen(navController: NavController) {
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                CityItem(city = city)
+                CityName(city = city)
             }
             Image(
                 painter = painterResource(id = getCityImage(city)),
-                contentDescription = "City Image",
+                contentDescription = "$city Image",
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
@@ -107,7 +123,7 @@ fun SecondScreen(navController: NavController) {
                 contentScale = ContentScale.Crop
             )
             Text(
-                text = getCityDescription(city),
+                text = CityDescription(city),
                 fontSize = 16.sp,
                 modifier = Modifier.padding(top = 8.dp)
             )
@@ -119,39 +135,15 @@ fun SecondScreen(navController: NavController) {
                     .padding(16.dp)
                     .fillMaxWidth()
             ) {
-                Text(text = "Back to Welcome Screen")
+                Text(text = stringResource(R.string.back_button))
             }
         }
     }
 }
 
 
-private fun getCityImage(city: String): Int {
-    return when (city) {
-        "Yerevan" -> R.drawable.yerevan
-        "Washington" -> R.drawable.washington
-        "Madrid" -> R.drawable.madrid
-        "Paris" -> R.drawable.paris
-        "Tokyo" -> R.drawable.tokyo
-        "Warsaw" -> R.drawable.warsaw
-        else -> R.drawable.no_image
-    }
-}
-
-private fun getCityDescription(city: String): String {
-    return when (city) {
-        "Yerevan" -> "The capital and largest city of Armenia."
-        "Washington" -> "The capital city of the United States."
-        "Madrid" -> "The capital and largest city of Spain."
-        "Paris" -> "The capital and largest city of France, known for its art, fashion, and culture."
-        "Tokyo" -> "The capital and largest city of Japan, known for its technology and pop culture."
-        "Warsaw" -> "The capital and largest city of Poland."
-        else -> "Description not available."
-    }
-}
-
 @Composable
-fun CityItem(city: String) {
+fun CityName(city: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -165,9 +157,35 @@ fun CityItem(city: String) {
     }
 }
 
+private fun getCityImage(city: String): Int {
+    return when (city) {
+        "Yerevan" -> R.drawable.yerevan
+        "Washington" -> R.drawable.washington
+        "Madrid" -> R.drawable.madrid
+        "Paris" -> R.drawable.paris
+        "Tokyo" -> R.drawable.tokyo
+        "Warsaw" -> R.drawable.warsaw
+        else -> R.drawable.no_image
+    }
+}
+
+@Composable
+fun CityDescription(city: String): String {
+    val resourceId = when (city) {
+        "Yerevan" -> R.string.yerevan_description
+        "Washington" -> R.string.washington_description
+        "Madrid" -> R.string.madrid_description
+        "Paris" -> R.string.paris_description
+        "Tokyo" -> R.string.tokyo_description
+        "Warsaw" -> R.string.warsaw_description
+        else -> R.string.default_description
+    }
+    return stringResource(resourceId)
+}
+
 @Preview(showBackground = true)
 @Composable
-fun Preview() {
+fun CityPreview() {
     MobileHW2Theme {
     }
 }
