@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Mobile-HW2</string>
+    <string name="welcome_message">Welcome to the City Explorer!</string>
+    <string name="list_button">Go to Explore the Cities</string>
+    <string name="back_button">Back to Welcome Screen</string>
+    <string name="yerevan_description">Yerevan is the capital and largest city of Armenia, known for its rich history.</string>
+    <string name="washington_description">Washington, D.C. is the capital city of the United States, famous for its landmarks.</string>
+    <string name="madrid_description">Madrid, the capital and largest city of Spain, offers a lively cultural experience.</string>
+    <string name="paris_description">Paris, the capital of France, is celebrated for its art, fashion, and culture.</string>
+    <string name="tokyo_description">Tokyo, Japan\'s capital, combines tradition and technology in a unique way.</string>
+    <string name="warsaw_description">Warsaw, Poland\'s capital, has a dynamic history waiting to be explored.</string>
+    <string name="default_description">Description not available.</string>
 </resources>
