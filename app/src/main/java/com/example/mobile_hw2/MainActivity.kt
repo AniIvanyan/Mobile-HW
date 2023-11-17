@@ -3,6 +3,7 @@ package com.example.mobile_hw2
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
@@ -13,6 +14,7 @@ import androidx.navigation.compose.composable
 
 class MainActivity : ComponentActivity() {
     private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -21,6 +23,7 @@ class MainActivity : ComponentActivity() {
             this.navController = navController
 
             MobileHW2Theme {
+                val viewModel: MainViewModel by viewModels()
                 NavHost(
                     navController = navController,
                     startDestination = "welcome_screen"
@@ -29,7 +32,7 @@ class MainActivity : ComponentActivity() {
                         WelcomeScreen(navController)
                     }
                     composable("list_screen") {
-                        ListScreen(navController)
+                        ListScreen(navController, viewModel)
                     }
                 }
             }
