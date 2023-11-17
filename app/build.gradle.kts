@@ -78,5 +78,7 @@ dependencies {
     implementation ("androidx.compose.runtime:runtime-livedata:1.0.5")
     implementation ("androidx.compose.runtime:runtime-livedata:1.3.1")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
+    implementation ("com.google.android.gms:play-services-location:18.0.0")
+    implementation ("androidx.core:core-ktx:1.7.0")
 
 }

@@ -11,6 +11,9 @@ class MainViewModel : ViewModel() {
     private val _weatherData = MutableLiveData<WeatherResponse>()
     val weatherData: LiveData<WeatherResponse> get() = _weatherData
 
+    private val _location = MutableLiveData<Pair<Double, Double>>()
+    val location: LiveData<Pair<Double, Double>> get() = _location
+
     fun fetchWeather(city: String, repository: Repository) {
         viewModelScope.launch {
             try {
@@ -21,8 +24,12 @@ class MainViewModel : ViewModel() {
                     Log.e("Retrofit", "Failed to retrieve weather data for $city")
                 }
             } catch (e: Exception) {
-                Log.e("Retrofit", "Error fetching user data", e);
+                Log.e("Retrofit", "Error fetching weather data", e)
             }
         }
+    }
+
+    fun setLocation(latitude: Double, longitude: Double) {
+        _location.value = Pair(latitude, longitude)
     }
 }

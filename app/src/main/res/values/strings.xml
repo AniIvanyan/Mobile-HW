@@ -10,4 +10,6 @@
     <string name="tokyo_description">Tokyo, Japan\'s capital, combines tradition and technology in a unique way.</string>
     <string name="warsaw_description">Warsaw, Poland\'s capital, has a dynamic history waiting to be explored.</string>
     <string name="default_description">Description not available.</string>
+    <string name="weather_no">Weather information not available.</string>
+    <string name="location_no">Location permission not granted.</string>
 </resources>

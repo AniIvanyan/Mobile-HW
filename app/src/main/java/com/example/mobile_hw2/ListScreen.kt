@@ -63,11 +63,19 @@ fun ListScreen(navController: NavController, viewModel: MainViewModel = viewMode
                         modifier = Modifier.padding(top = 8.dp)
                     )
 
-                    Text(
-                        text = "${weatherData?.current?.temp_c}°C",
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(top = 8.dp)
-                    )
+                    if (weatherData != null) {
+                        Text(
+                            text = "${weatherData.current.temp_c}°C",
+                            fontSize = 16.sp,
+                            modifier = Modifier.padding(top = 8.dp)
+                        )
+                    } else {
+                        Text(
+                            text = "Weather information not available",
+                            fontSize = 16.sp,
+                            modifier = Modifier.padding(bottom = 16.dp)
+                        )
+                    }
                 }
             }
         }
