@@ -10,5 +10,7 @@ data class Location(
 )
 
 data class Current(
-    val temp_c: Float
+    val temp_c: Float,
+    val temp_f: Float,
+    val humidity: Float
 )

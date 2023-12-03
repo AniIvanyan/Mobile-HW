@@ -9,4 +9,15 @@ class Repository {
     suspend fun getWeather(city: String): Response<WeatherResponse> {
         return apiService.getWeather(apiKey, city)
     }
+
+    suspend fun getWeatherForCurrentLocation(
+        latitude: Double,
+        longitude: Double
+    ): Response<WeatherResponse> {
+        return apiService.getWeather(apiKey, "$latitude,$longitude")
+    }
+
+    suspend fun getTemperatureForCity(city: String): Response<WeatherResponse> {
+        return apiService.getWeather(apiKey, city)
+    }
 }
