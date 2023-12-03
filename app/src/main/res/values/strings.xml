@@ -12,4 +12,8 @@
     <string name="default_description">Description not available.</string>
     <string name="weather_no">Weather information not available.</string>
     <string name="location_no">Location permission not granted.</string>
+    <string name="settings_title">Settings</string>
+    <string name="celsius">Celsius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="save_button">Save</string>
 </resources>

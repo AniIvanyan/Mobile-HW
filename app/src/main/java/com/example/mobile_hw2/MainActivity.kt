@@ -60,6 +60,9 @@ class MainActivity : ComponentActivity() {
                         composable("list_screen") {
                             ListScreen(navController, viewModel)
                         }
+                        composable("settings_screen") {
+                            SettingsScreen(navController, viewModel)
+                        }
                     }
                 }
             }

@@ -36,6 +36,7 @@ fun ListScreen(navController: NavController, viewModel: MainViewModel = viewMode
         items(cityList) { city ->
             LaunchedEffect(city) {
                 viewModel.fetchWeather(city, repository = Repository())
+                viewModel.fetchTemperature(city, Repository())
             }
             val weatherData = viewModel.weatherData.value
 
@@ -64,11 +65,10 @@ fun ListScreen(navController: NavController, viewModel: MainViewModel = viewMode
                     )
 
                     if (weatherData != null) {
-                        Text(
-                            text = "${weatherData.current.temp_c}°C",
-                            fontSize = 16.sp,
-                            modifier = Modifier.padding(top = 8.dp)
-                        )
+                        val temperatureUnit =
+                            viewModel.temperatureUnit.value ?: TemperatureUnit.Celsius
+
+                        TemperatureInfo(weatherData.current, temperatureUnit)
                     } else {
                         Text(
                             text = "Weather information not available",
